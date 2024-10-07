@@ -31,19 +31,19 @@ jobs:
     - name: Install Dependencies
       run: |
         if [ -f "requirements.txt" ]; then
-          pip install -r requirements.txt
+          pip install -r requirements.txt  # Install packages listed in requirements.txt
         fi
 
     # Install Jupyter to execute .ipynb files
     - name: Install Jupyter
-      run: pip install notebook
+      run: pip install notebook  # Install Jupyter Notebook
 
     # Test .py files by executing them
     - name: Test Python Files (.py)
       run: |
         for file in $(find . -name "*.py"); do
           echo "Testing $file"
-          python $file || exit 1  # Fail if there is an error in any .py file
+          python "$file" || exit 1  # Fail if there is an error in any .py file
         done
 
     # Test .ipynb files by executing them
@@ -51,5 +51,8 @@ jobs:
       run: |
         for file in $(find . -name "*.ipynb"); do
           echo "Testing $file"
-          jupyter nbconvert --to notebook --execute --inplace "$file" || exit 1  # Fail if any notebook has an error
+          # Execute the notebook and convert it back to a notebook format
+          jupyter nbconvert --to notebook --execute --inplace "$file" || { 
+            echo "Error in notebook: $file"; exit 1;  # Display an error message if execution fails
+          }
         done
