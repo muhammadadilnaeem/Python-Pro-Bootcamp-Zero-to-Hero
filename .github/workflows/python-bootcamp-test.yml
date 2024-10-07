@@ -1,0 +1,55 @@
+# .github/workflows/python-bootcamp-test.yml
+# GitHub Actions workflow to test Python files (.py) and Jupyter Notebooks (.ipynb)
+# on every push and pull request
+
+name: Test Python Bootcamp Code
+
+# This workflow will run on any push or pull request to the repository
+on:
+  push:
+    branches:
+      - main  # You can adjust this to any branch you want to monitor
+  pull_request:
+
+# Define the job to run the tests
+jobs:
+  test-code:
+    runs-on: ubuntu-latest  # The runner will use the latest Ubuntu environment
+
+    steps:
+    # Checkout the code from the repository
+    - name: Checkout Code
+      uses: actions/checkout@v3
+
+    # Set up Python environment
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: 3.10  # Specify Python version you are using 
+        
+    # Install dependencies (if you have a requirements.txt file)
+    - name: Install Dependencies
+      run: |
+        if [ -f "requirements.txt" ]; then
+          pip install -r requirements.txt
+        fi
+
+    # Install Jupyter to execute .ipynb files
+    - name: Install Jupyter
+      run: pip install notebook
+
+    # Test .py files by executing them
+    - name: Test Python Files (.py)
+      run: |
+        for file in $(find . -name "*.py"); do
+          echo "Testing $file"
+          python $file || exit 1  # Fail if there is an error in any .py file
+        done
+
+    # Test .ipynb files by executing them
+    - name: Test Jupyter Notebooks (.ipynb)
+      run: |
+        for file in $(find . -name "*.ipynb"); do
+          echo "Testing $file"
+          jupyter nbconvert --to notebook --execute --inplace "$file" || exit 1  # Fail if any notebook has an error
+        done
