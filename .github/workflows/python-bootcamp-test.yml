@@ -20,12 +20,15 @@ jobs:
     # Checkout the code from the repository
     - name: Checkout Code
       uses: actions/checkout@v3
+      with:
+        node-version: '20'  # Specify Node.js version 20
 
     # Set up Python environment
     - name: Set up Python
       uses: actions/setup-python@v4
       with:
         python-version: '3.10'  # Specify the correct Python version (use quotes)
+        node-version: '20'  # Specify Node.js version 20
 
     # Install dependencies (if you have a requirements.txt file)
     - name: Install Dependencies
