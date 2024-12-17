@@ -1,3 +1,4 @@
 pytest
 ipykernel
 python-dotenv
+numpy
