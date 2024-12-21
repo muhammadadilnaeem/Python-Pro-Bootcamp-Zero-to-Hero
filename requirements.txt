@@ -1,4 +1,5 @@
 pytest
 ipykernel
 python-dotenv
+rich
 numpy
