@@ -2,4 +2,5 @@ pytest
 ipykernel
 python-dotenv
 rich
+streamlit
 numpy
