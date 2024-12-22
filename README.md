@@ -63,7 +63,7 @@ This project is licensed under the **MIT License**. See the [LICENSE](https://gi
 For questions or feedback, feel free to reach out:
 
 - **GitHub**: [Muhammad Adil Naeem](https://github.com/muhammadadilnaeem)
-- **Email**: [muhammadadilnaeem@example.com](mailto:muhammadadilnaeem@example.com)
+- **Email**: [madilnaeem0@gmail.com](mailto:madilnaeem0@gmail.com)
 
 ---
 
